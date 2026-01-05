@@ -28,53 +28,27 @@ class MainActivity : AppCompatActivity() {
 
     //Hearts
     private lateinit var Main_IMG_hearts: Array<AppCompatImageView>
-
     //Roosters
-
     private lateinit var Main_IMG_Rooster_1: AppCompatImageView
-
     private lateinit var Main_IMG_Rooster_2: AppCompatImageView
-
     private lateinit var Main_IMG_Rooster_3: AppCompatImageView
-
     private lateinit var Main_IMG_Rooster_4: AppCompatImageView
-
     private lateinit var Main_IMG_Rooster_5: AppCompatImageView
-
     private lateinit var Main_IMG_pans: Array<AppCompatImageView>
-
-
     //Fabs
-
     private lateinit var Main_FAB_Left: FloatingActionButton
-
     private lateinit var Main_FAB_Right: FloatingActionButton
-
-
     //Score
     private lateinit var Main_LBL_Score: MaterialTextView
-
-
     private var scoreFlag: Boolean = false
-
     //Seeds
-
     private lateinit var Main_IMG_seeds: Array<AppCompatImageView>
-
-
     //Eggs
-
     private lateinit var Main_IMG_eggs: Array<AppCompatImageView>
-
-
     //Others
-
     private var gameSpeed: Boolean = false // f - slow , t - fast
-
     private var gameMode: Boolean = false // f - buttons , t - sensors
-
     private lateinit var timerJob: Job //Timer For Coroutine
-
     private lateinit var gameManager: GameManager
 
 
@@ -256,7 +230,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // Start Timer Coroutine For Pans UI Update
+    // Start Timer Coroutine For UI Update & Game Logic
     private fun startGame() {
 
         timerJob = lifecycleScope.launch {
@@ -272,7 +246,7 @@ class MainActivity : AppCompatActivity() {
                     delay(Constants.Timer.DELAY)
 
                 if (scoreFlag)
-                    gameManager.scoreUpdate()
+                    gameManager.score ++
 
                 when(gameManager.checkForHit()){
                     0 -> makeHit(0)
@@ -286,13 +260,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //If Game Over Moving To Next Activity & Stop The Timer
     private fun checkIfGameOver() {
         if (gameManager.isGameOver) {
             timerJob.cancel()
             val intent = Intent(this, GameEndScreen::class.java)
             val bundle = Bundle()
             val totalScore = gameManager.calculateFinalScore(gameSpeed)
-            Log.d("total score", "score: $totalScore",)
 
 
             bundle.putInt(Constants.BundleKeys.SCORE_KEY, totalScore)
@@ -302,7 +276,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //Change Visibility Of Pans & Seed And 'Move' them Down
+    //Change Visibility Of Pans & Seed & Eggs And 'Move' them Down + Update The Score
     private fun refreshUI() {
         Main_IMG_pans.forEachIndexed { index, img ->
             if (gameManager.isPanVisible[index] == 1) {
@@ -331,6 +305,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //Doing The Hit Logic For Each Type Of Collision
     private fun makeHit(type: Int){ // 0 - pan, 1 - seed, 2 - egg
         val ssp = SingleSoundPlayer(this)
 

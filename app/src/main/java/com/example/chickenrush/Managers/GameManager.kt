@@ -36,6 +36,7 @@ class GameManager(private val lifeCount: Int = 3) {
     private var spaceFlag: Int = 0 //Boolean For Spacing The Lines
 
 
+    // Managing Pan Visibility Logic
     fun updatePanUI() {
         updatePanVisibleArray()
         if (spaceFlag == 0) {
@@ -72,7 +73,7 @@ class GameManager(private val lifeCount: Int = 3) {
         }
     }
 
-
+    // Managing Egg Visibility Logic
      fun updateEggUI() {
         updateEggVisibleArray()
         if (!eggOnBoard) {
@@ -103,32 +104,7 @@ class GameManager(private val lifeCount: Int = 3) {
 
         eggOnBoard = anyEgg
     }
-    fun scoreUpdate(){
-        score ++
-    }
-
-    fun calculateFinalScore(gameSpeed: Boolean): Int {
-        return if (gameSpeed) {
-            ((score * 7) + (eggsCollected * 25)) * 2
-        } else {
-            (score * 7) + (eggsCollected * 25)
-        }
-
-    }
-
-    fun moveRight() {
-        if (roosterPosition < 4) {
-            roosterPosition++
-        }
-    }
-
-    fun moveLeft() {
-        if (roosterPosition > 0) {
-            roosterPosition--
-
-        }
-    }
-
+    // Managing Seed Visibility Logic
     fun updateSeedUI() {
         updateSeedVisibleArray()
         if (seedFlag && !seedSeenOnBoard) {
@@ -154,6 +130,34 @@ class GameManager(private val lifeCount: Int = 3) {
         }
         seedSeenOnBoard = anySeed
     }
+
+    //Calculating The Final Score
+    //Eggs Worth 25 Points
+    //Fast Mode Worth Double The Point
+    //The Distance Is Worth 7 Times The Distance Passed
+    fun calculateFinalScore(gameSpeed: Boolean): Int {
+        return if (gameSpeed) {
+            ((score * 7) + (eggsCollected * 25)) * 2
+        } else {
+            (score * 7) + (eggsCollected * 25)
+        }
+
+    }
+
+    //Rooster Movement Logic
+    fun moveRight() {
+        if (roosterPosition < 4) {
+            roosterPosition++
+        }
+    }
+
+    fun moveLeft() {
+        if (roosterPosition > 0) {
+            roosterPosition--
+
+        }
+    }
+
 
     private fun preventSeedPanEggOverlap() {
         for (i in 0 until 30) {
