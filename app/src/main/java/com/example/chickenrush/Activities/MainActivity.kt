@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.chickenrush.Managers.GameManager
 import com.example.chickenrush.R
 import com.example.chickenrush.utilities.BackgroundMusicPlayer
 import com.example.chickenrush.utilities.Constants
@@ -42,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var Main_IMG_pans: Array<AppCompatImageView>
 
-    private val isVisible = IntArray(30)
 
     //Fabs
 
@@ -54,30 +54,17 @@ class MainActivity : AppCompatActivity() {
     //Score
     private lateinit var Main_LBL_Score: MaterialTextView
 
-    private var score = 0
 
     private var scoreFlag: Boolean = false
-
 
     //Seeds
 
     private lateinit var Main_IMG_seeds: Array<AppCompatImageView>
 
-    private var seedFlag: Boolean = false
-
-    private var seedOnBoard: Boolean = false
-
-    private val isSeedVisible = IntArray(30)
 
     //Eggs
 
     private lateinit var Main_IMG_eggs: Array<AppCompatImageView>
-
-    private val isEggVisible = IntArray(30)
-
-    private var eggsCollected: Int = 0
-
-    private var eggOnBoard = false
 
 
     //Others
@@ -86,20 +73,9 @@ class MainActivity : AppCompatActivity() {
 
     private var gameMode: Boolean = false // f - buttons , t - sensors
 
-    private var roosterPosition: Int = 2 //0 - 4
-
     private lateinit var timerJob: Job //Timer For Coroutine
 
-    private var spaceFlag: Int = 0 //Boolean For Spacing The Lines
-
-    private var lastSpawnLane = -1
-
-    private var sameLaneStreak = 0
-
-    private var hits: Int = 0
-
-    private var didNavigateToEndScreen = false
-    private var isGameOver: Boolean = false
+    private lateinit var gameManager: GameManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -112,8 +88,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
         findViews()
+        gameManager = GameManager(Main_IMG_hearts.size)
         initViews()
         startGame()
 
@@ -122,12 +98,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        BackgroundMusicPlayer.Companion.getInstance().playMusic()
+        BackgroundMusicPlayer.getInstance().playMusic()
     }
 
     override fun onPause() {
         super.onPause()
-        BackgroundMusicPlayer.Companion.getInstance().pauseMusic()
+        BackgroundMusicPlayer.getInstance().pauseMusic()
     }
 
     private fun findViews() {
@@ -250,7 +226,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        updateRooster()
+
+        Main_IMG_Rooster_3.visibility = View.VISIBLE
 
         val bundle: Bundle? = intent.extras
 
@@ -268,10 +245,12 @@ class MainActivity : AppCompatActivity() {
 
 
         Main_FAB_Left.setOnClickListener { view ->
-            moveLeft()
+            gameManager.moveLeft()
+            updateRooster()
         }
         Main_FAB_Right.setOnClickListener { view ->
-            moveRight()
+            gameManager.moveRight()
+            updateRooster()
         }
 
 
@@ -283,260 +262,119 @@ class MainActivity : AppCompatActivity() {
         timerJob = lifecycleScope.launch {
             while (isActive) {
                 Log.d("Timer Runnable", "Active: \$isActive")
-                // Refresh UI:
-                updatePanUI()
-                updateSeedUI()
-                updateEggUI()
+
+                gameManager.updatePanUI()
+                gameManager.updateSeedUI()
+                gameManager.updateEggUI()
                 if (gameSpeed)
                     delay(Constants.Timer.DELAY / 2)
                 else
                     delay(Constants.Timer.DELAY)
 
                 if (scoreFlag)
-                    updateScore()
-                else
-                    scoreFlag = !scoreFlag
+                    gameManager.scoreUpdate()
+
+                when(gameManager.checkForHit()){
+                    0 -> makeHit(0)
+                    1 -> makeHit(1)
+                    2 -> makeHit(2)
+                }
+                refreshUI()
                 checkIfGameOver()
+                scoreFlag = !scoreFlag
             }
         }
     }
 
-    private fun updateScore() {
-        score++
-        Main_LBL_Score.text = String.format("%03d", score)
-    }
-
     private fun checkIfGameOver() {
-        if (isGameOver) {
+        if (gameManager.isGameOver) {
             timerJob.cancel()
             val intent = Intent(this, GameEndScreen::class.java)
             val bundle = Bundle()
-            val totalScore =
-                if (gameSpeed) {
-                ((score * 7) + (eggsCollected * 25)) * 2
-            } else {
-                (score * 7) + (eggsCollected * 25)
-            }
+            val totalScore = gameManager.calculateFinalScore(gameSpeed)
+            Log.d("total score", "score: $totalScore",)
 
-            bundle.putInt(Constants.BundleKeys.MESSAGE_KEY, totalScore)
+
+            bundle.putInt(Constants.BundleKeys.SCORE_KEY, totalScore)
             intent.putExtras(bundle)
             startActivity(intent)
             finish()
         }
     }
 
-    private fun updateSeedUI() {
-        updateSeedVisibleArray()
-        if (seedFlag && !seedOnBoard) {
-            val lane = Random.Default.nextInt(5)
-            isSeedVisible[lane] = 1
-            seedOnBoard = true
-        }
-
-        preventSeedPanEggOverlap()
-
-    }
-
-    private fun updateSeedVisibleArray() {
-        var anySeed = false
-        for (i in 29 downTo 0) {
-            if (isSeedVisible[i] == 1) {
-                isSeedVisible[i] = 0
-                val next = i + 5
-                if (next <= 29) {
-                    isSeedVisible[next] = 1
-                    anySeed = true
-                }
-            }
-        }
-        seedOnBoard = anySeed
-    }
-
-    private fun updateEggUI() {
-        updateEggVisibleArray()
-        if (!eggOnBoard) {
-            val chance = Random.Default.nextInt(100)
-            if (chance < 15) {
-                val lane = Random.Default.nextInt(5)
-                isEggVisible[lane] = 1
-                eggOnBoard = true
-            }
-        }
-        preventSeedPanEggOverlap()
-
-    }
-    private fun updateEggVisibleArray() {
-        var anyEgg = false
-
-        for (i in 29 downTo 0) {
-            if (isEggVisible[i] == 1) {
-                isEggVisible[i] = 0
-                val next = i + 5
-                if (next <= 29) {
-                    isEggVisible[next] = 1
-                    anyEgg = true
-                }
-            }
-        }
-
-        eggOnBoard = anyEgg
-    }
-
-
-    // Choose random Pan To Add & Call For Func To - Update The Game Board, Check If Hit Happened
-    private fun updatePanUI() {
-        updatePanVisibleArray()
-        if (spaceFlag == 0) {
-            var lane = Random.Default.nextInt(5)
-
-            if (lane == lastSpawnLane) {
-                sameLaneStreak++
-                if (sameLaneStreak >= 2) {
-                    lane = (0..2).filter { it != lastSpawnLane }.random()
-                    sameLaneStreak = 0
-                }
-            } else {
-                lastSpawnLane = lane
-                sameLaneStreak = 0
-            }
-
-            isVisible[lane] = 1
-            spaceFlag = 1
-        } else
-            spaceFlag = 0
-        preventSeedPanEggOverlap()
-
-        checkForHit()
-
-    }
-
-    //Update The Array That Track Visibility Of The Pans
-    private fun updatePanVisibleArray() {
-        Main_IMG_pans.forEachIndexed { index, img ->
-            if (img.visibility == View.VISIBLE && index < 25) {
-                isVisible[index] = 0
-                isVisible[index + 5] = 1
-            }
-            if (img.visibility == View.VISIBLE && index >= 25) {
-                isVisible[index] = 0
-            }
-
-        }
-    }
-
-    private fun preventSeedPanEggOverlap() {
-        for (i in 0 until 30) {
-            if (isVisible[i] == 1) {
-                if (isSeedVisible[i] == 1) {
-                    isSeedVisible[i] = 0
-                    seedOnBoard = false
-                }
-                if (isEggVisible[i] == 1) {
-                    isEggVisible[i] = 0
-                    eggOnBoard = false
-                }
-            }
-            else if (isSeedVisible[i] == 1 && isEggVisible[i] == 1) {
-                isEggVisible[i] = 0
-                eggOnBoard = false
-            }
-        }
-    }
-
-
     //Change Visibility Of Pans & Seed And 'Move' them Down
     private fun refreshUI() {
         Main_IMG_pans.forEachIndexed { index, img ->
-            if (isVisible[index] == 1) {
+            if (gameManager.isPanVisible[index] == 1) {
                 img.visibility = View.VISIBLE
             } else
                 img.visibility = View.INVISIBLE
 
         }
         Main_IMG_seeds.forEachIndexed { index, img ->
-            if (isSeedVisible[index] == 1) {
+            if (gameManager.isSeedVisible[index] == 1) {
                 img.visibility = View.VISIBLE
             } else
                 img.visibility = View.INVISIBLE
 
         }
         Main_IMG_eggs.forEachIndexed { index, img ->
-            if (isEggVisible[index] == 1) {
+            if (gameManager.isEggVisible[index] == 1) {
                 img.visibility = View.VISIBLE
             } else
                 img.visibility = View.INVISIBLE
 
         }
+
+        Main_LBL_Score.text = String.format("%03d", gameManager.score)
+
+
     }
 
-    //Check If There Is A Collision Between A Rooster And [A Pan Or A Seed]
-    private fun checkForHit() {
-        val hitIndex = when (roosterPosition) {
-            0 -> 25
-            1 -> 26
-            2 -> 27
-            3 -> 28
-            else -> 29
-        }
-        if (isVisible[hitIndex] == 1) {
-            isVisible[hitIndex] = 0
-            makePanHit()
-        }
-        if (isSeedVisible[hitIndex] == 1) {
-            isSeedVisible[hitIndex] = 0
-            makeSeedHit()
-            seedOnBoard = false
-        }
-        if (isEggVisible[hitIndex] == 1) {
-            isEggVisible[hitIndex] = 0
-            makeEggHit()
-        }
-
-        refreshUI()
-    }
-
-    //Calling a Function For Heart Decrease & Calling Functions For Toast & Vibrate
-    private fun makePanHit() {
+    private fun makeHit(type: Int){ // 0 - pan, 1 - seed, 2 - egg
         val ssp = SingleSoundPlayer(this)
-        ssp.playSound(R.raw.hitsound)
-        heartDecrease()
-        makeToast()
-        makeVibration()
 
-    }
+        when (type) {
+            0 -> {
+                ssp.playSound(R.raw.hitsound)
+                heartDecrease()
+                makeToast()
+                makeVibration()
+            }
+            1 -> {
+                ssp.playSound(R.raw.seedsound)
+                heartIncrease()
+            }
+            else -> {
+                ssp.playSound(R.raw.eggcrack)
+                gameManager.eggsCollected++
+            }
+        }
 
-    private fun makeSeedHit() {
-        val ssp = SingleSoundPlayer(this)
-        ssp.playSound(R.raw.seedsound)
-        heartIncrease()
-    }
-    private fun makeEggHit() {
-        val ssp = SingleSoundPlayer(this)
-        ssp.playSound(R.raw.eggcrack)
-        eggsCollected++
+
     }
 
     //Heart Ui Update
     private fun heartDecrease() {
-        if (hits < Main_IMG_hearts.size) {
-            hits++
-            Main_IMG_hearts[Main_IMG_hearts.size - hits].visibility = View.INVISIBLE
+        if (gameManager.hits < Main_IMG_hearts.size) {
+            gameManager.hits++
+            Main_IMG_hearts[Main_IMG_hearts.size - gameManager.hits].visibility = View.INVISIBLE
         }
-        seedFlag = hits > 0
+        gameManager.seedFlag = gameManager.hits > 0
 
-        if (hits == Main_IMG_hearts.size) {
-            isGameOver = true
+        if (gameManager.hits == Main_IMG_hearts.size) {
+            gameManager.isGameOver = true
         }
 
     }
 
     private fun heartIncrease() {
-        if (hits > 0) {
-            hits--
-            Main_IMG_hearts[Main_IMG_hearts.size - 1 - hits].visibility = View.VISIBLE
+        if (gameManager.hits > 0) {
+            gameManager.hits--
+            Main_IMG_hearts[Main_IMG_hearts.size - 1 - gameManager.hits].visibility = View.VISIBLE
         }
 
-        seedFlag = hits > 0
+        gameManager.seedFlag = gameManager.hits > 0
 
     }
 
@@ -565,7 +403,7 @@ class MainActivity : AppCompatActivity() {
         Main_IMG_Rooster_4.visibility = View.INVISIBLE
         Main_IMG_Rooster_5.visibility = View.INVISIBLE
 
-        when (roosterPosition) {
+        when (gameManager.roosterPosition) {
             0 -> Main_IMG_Rooster_1.visibility = View.VISIBLE
             1 -> Main_IMG_Rooster_2.visibility = View.VISIBLE
             2 -> Main_IMG_Rooster_3.visibility = View.VISIBLE
@@ -574,20 +412,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //updating the rooster position in the variable for right move
-    private fun moveRight() {
-        if (roosterPosition < 4) {
-            roosterPosition++
-            updateRooster()
-        }
-    }
-
-    //updating the rooster position in the variable for left move
-    private fun moveLeft() {
-        if (roosterPosition > 0) {
-            roosterPosition--
-            updateRooster()
-        }
-    }
 
 }

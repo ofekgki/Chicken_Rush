@@ -11,4 +11,9 @@ class Constants {
         const val SPEED_KEY: String = "SPEED_KEY"
         const val SCORE_KEY: String = "SCORE_KEY"
     }
+
+    object SPKEYS{
+        const val DATA_FILE = "game_data"
+        const val TOP_10_SCORES = "top_10_scores"
+    }
 }

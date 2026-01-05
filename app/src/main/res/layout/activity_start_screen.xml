@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/Default_Margin"
         android:layout_alignParentRight="true"
-        android:text="Slow   "
+        android:text="@string/slow"
         android:textStyle="bold"
         android:textSize="@dimen/Default_StringSize"
         />
