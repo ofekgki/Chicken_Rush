@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="Default_Margin">24dp</dimen>
+    <dimen name="Fab_Default_Size">48dp</dimen>
+    <dimen name="Separator_margin">28dp</dimen>
+    <dimen name="Lane_Start">104dp</dimen>
+    <dimen name="Default_StringSize">18sp</dimen>
+    <dimen name="End_Game_Massage_Size">64sp</dimen>
+    <dimen name="EndBTN_width">200dp</dimen>
+    <dimen name="EndBTN_height">140dp</dimen>
+    <dimen name="EndLBL_paddingTop">58dp</dimen>
+    <dimen name="EndLBL_paddingLeft">46dp</dimen>
+    <dimen name="TopLBL_paddingLeft">60dp</dimen>
+    <dimen name="heading_size">64sp</dimen>
+</resources>

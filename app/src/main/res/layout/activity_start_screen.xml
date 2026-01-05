@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.StartScreen"
+    android:background="@drawable/chickencoop"
+    >
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/start_STC_fastslow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/Default_Margin"
+        android:layout_alignParentRight="true"
+        android:text="Slow   "
+        android:textStyle="bold"
+        android:textSize="@dimen/Default_StringSize"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@id/top_ten"
+        android:layout_margin="@dimen/Default_Margin"
+        >
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/start_BTN_sensor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sensor_mode"
+            android:textStyle="bold"
+            android:layout_marginRight="@dimen/Default_Margin"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/start_BTN_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/buttons_mode"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/top_ten"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/Default_Margin"
+        android:layout_alignParentBottom="true"
+        >
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/start_BTN_top10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/top_ten"
+        android:textStyle="bold"
+        android:textSize="@dimen/Default_StringSize"
+
+
+        />
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/start_LBL_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/heading_size"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="86dp"
+
+        />
+
+</RelativeLayout>

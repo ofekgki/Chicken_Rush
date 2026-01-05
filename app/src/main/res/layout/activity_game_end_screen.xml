@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/kitchen"
+    tools:context=".Activities.GameEndScreen">
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/highScore_ET_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/End_LBL_Massage"
+        android:inputType="text"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:hint="@string/enter_name"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/End_LBL_Massage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/Default_Margin"
+        android:text="@string/Lost_Message"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="@dimen/End_Game_Massage_Size"
+        android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@id/End_LBL_Massage"
+
+    >
+    <FrameLayout
+        android:id="@+id/End_BTN_StartGame_Container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/Default_Margin">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/End_BTN_StartGame"
+            android:layout_width="@dimen/EndBTN_width"
+            android:layout_height="@dimen/EndBTN_height"
+            android:background="@android:color/transparent"
+            android:src="@drawable/chicken"
+            android:scaleType="fitCenter"
+            android:tint="@color/orange_500"
+            android:contentDescription="@string/start_game"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/End_LBL_StartGame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/start_menu"
+            android:layoutDirection="ltr"
+            android:textStyle="bold"
+            android:textSize="@dimen/Default_StringSize"
+            android:textColor="@color/yellow_500"
+            android:gravity="top|center_horizontal"
+            android:paddingTop="@dimen/EndLBL_paddingTop"
+            android:paddingLeft="@dimen/EndLBL_paddingLeft"
+            />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/End_BTN_TopTen_Container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/Default_Margin">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/End_BTN_Topten"
+            android:layout_width="@dimen/EndBTN_width"
+            android:layout_height="@dimen/EndBTN_height"
+            android:background="@android:color/transparent"
+            android:src="@drawable/chicken"
+            android:scaleType="fitCenter"
+            android:tint="@color/orange_500"
+            android:contentDescription="@string/start_game"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/End_LBL_TopTen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/top_ten"
+            android:layoutDirection="ltr"
+            android:textStyle="bold"
+            android:textSize="@dimen/Default_StringSize"
+            android:textColor="@color/yellow_500"
+            android:gravity="top|center_horizontal"
+            android:paddingTop="@dimen/EndLBL_paddingTop"
+            android:paddingLeft="@dimen/TopLBL_paddingLeft"
+            />
+
+    </FrameLayout>
+</LinearLayout>
+
+
+</RelativeLayout>
