@@ -1,6 +1,7 @@
-package com.example.chickenrush.utilities
+package com.example.chickenrush.Managers
 
 import android.content.Context
+import com.example.chickenrush.utilities.Constants
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -15,7 +16,9 @@ class SharedPreferencesManager private constructor(context: Context) {
 
     data class ScoreEntry(
         val playerName: String,
-        val score: Int
+        val score: Int,
+        val lat: Double,
+        val lon: Double
     )
 
     companion object{
@@ -66,10 +69,10 @@ class SharedPreferencesManager private constructor(context: Context) {
         return gson.fromJson(json, type) ?: mutableListOf()
     }
 
-    fun addNewScore(playerName: String, score: Int) {
+    fun addNewScore(playerName: String, score: Int, lat: Double, lon: Double) {
         val scores = getTop10Scores()
 
-        scores.add(ScoreEntry(playerName, score))
+        scores.add(ScoreEntry(playerName, score, lat, lon))
 
         val sortedTop10 = scores
             .sortedByDescending { it.score }

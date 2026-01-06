@@ -10,6 +10,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.chickenrush.R
 import com.example.chickenrush.utilities.Constants
+import com.example.chickenrush.Managers.SharedPreferencesManager
+import com.example.chickenrush.Managers.SignalManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textview.MaterialTextView
 
@@ -29,6 +31,12 @@ class GameEndScreen : AppCompatActivity() {
 
     private lateinit var highScore_ET_text: TextInputEditText
 
+    private lateinit var playerName: String
+
+    private var lat: Double = 0.0
+
+    private var lon: Double = 0.0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,20 +55,26 @@ class GameEndScreen : AppCompatActivity() {
     private fun initViews() {
         val bundle: Bundle? = intent.extras
 
-        val score = bundle?.getInt(Constants.BundleKeys.SCORE_KEY, 0)
+        val score = bundle?.getInt(Constants.BundleKeys.SCORE_KEY, 0) ?: 0
 
         End_LBL_Massage.text = String.format("%03d", score)
 
         End_BTN_StartGame.setOnClickListener { view: View ->
-            val intent = Intent(this, StartScreen::class.java)
-            startActivity(intent)
-            finish()
+            if (ValidateName()) {
+                SharedPreferencesManager.getInstance().addNewScore(playerName,score, lat, lon)
+                val intent = Intent(this, StartScreen::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
 
         End_BTN_Topten.setOnClickListener { view: View ->
-            val intent = Intent(this, TopTen::class.java)
-            startActivity(intent)
-            finish()
+            if (ValidateName()) {
+                SharedPreferencesManager.getInstance().addNewScore(playerName,score,lat, lon)
+                val intent = Intent(this, TopTen::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 
@@ -71,5 +85,36 @@ class GameEndScreen : AppCompatActivity() {
         End_LBL_StartGame = findViewById(R.id.End_LBL_StartGame)
         End_BTN_Topten = findViewById(R.id.End_BTN_Topten)
         End_LBL_TopTen = findViewById(R.id.End_LBL_TopTen)
+    }
+
+    private fun ValidateName(): Boolean {
+
+        val name = highScore_ET_text.text?.toString()
+
+        if (name.isNullOrEmpty()) {
+            makeToast()
+            makeVibarate()
+            return false
+        } else {
+            playerName = highScore_ET_text.text.toString().trim()
+            return true
+        }
+
+    }
+
+    private fun makeToast() {
+        SignalManager.Companion
+            .getInstance()
+            .toast(
+                "Must Enter Name!",
+                SignalManager.ToastLength.LONG
+            )
+    }
+
+    private fun makeVibarate() {
+        SignalManager.Companion
+            .getInstance()
+            .vibrate()
+
     }
 }

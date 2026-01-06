@@ -54,12 +54,12 @@ class StartScreen : AppCompatActivity() {
         }
 
         start_BTN_sensor.setOnClickListener {
-            changeActivity("Sensor", gameSpeed)
+            changeActivity(getString(R.string.mode_sensor), gameSpeed)
 
         }
 
         start_BTN_button.setOnClickListener {
-            changeActivity("Button", gameSpeed)
+            changeActivity(getString(R.string.mode_button), gameSpeed)
         }
 
         start_BTN_top10.setOnClickListener {

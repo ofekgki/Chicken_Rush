@@ -14,7 +14,7 @@ import com.example.chickenrush.Managers.GameManager
 import com.example.chickenrush.R
 import com.example.chickenrush.utilities.BackgroundMusicPlayer
 import com.example.chickenrush.utilities.Constants
-import com.example.chickenrush.utilities.SignalManager
+import com.example.chickenrush.Managers.SignalManager
 import com.example.chickenrush.utilities.SingleSoundPlayer
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
@@ -22,6 +22,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlin.concurrent.timer
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     //Eggs
     private lateinit var Main_IMG_eggs: Array<AppCompatImageView>
     //Others
-    private var gameSpeed: Boolean = false // f - slow , t - fast
+    private var gameSpeed: Boolean = false // f     - slow , t - fast
     private var gameMode: Boolean = false // f - buttons , t - sensors
     private lateinit var timerJob: Job //Timer For Coroutine
     private lateinit var gameManager: GameManager
@@ -64,19 +65,25 @@ class MainActivity : AppCompatActivity() {
 
         findViews()
         gameManager = GameManager(Main_IMG_hearts.size)
-        initViews()
-        startGame()
 
+        initViews()
 
     }
 
     override fun onResume() {
         super.onResume()
+        if (!::timerJob.isInitialized || !timerJob.isActive) {
+            startGame()
+        }
         BackgroundMusicPlayer.getInstance().playMusic()
     }
 
     override fun onPause() {
         super.onPause()
+        if (::timerJob.isInitialized) {
+            timerJob.cancel()
+            Log.d("Timer","Cancel From Pause" )
+        }
         BackgroundMusicPlayer.getInstance().pauseMusic()
     }
 
@@ -205,19 +212,19 @@ class MainActivity : AppCompatActivity() {
 
         val bundle: Bundle? = intent.extras
 
-        val message = bundle?.getString(Constants.BundleKeys.MESSAGE_KEY) ?: "Button"
+        val message = bundle?.getString(Constants.BundleKeys.MODE_KEY) ?: "Button"
 
-        if (message == "Button")
-            gameMode = false
-        else if (message == "Sensor")
-            gameMode = true
+        gameMode = (message == getString(R.string.mode_sensor))
 
         gameSpeed = bundle?.getBoolean(Constants.BundleKeys.SPEED_KEY) ?: false
 
-
-
-
-
+        if (gameMode) {
+            Main_FAB_Right.visibility = View.INVISIBLE
+            Main_FAB_Left.visibility = View.INVISIBLE
+        } else {
+            Main_FAB_Right.visibility = View.VISIBLE
+            Main_FAB_Left.visibility = View.VISIBLE
+        }
         Main_FAB_Left.setOnClickListener { view ->
             gameManager.moveLeft()
             updateRooster()
@@ -359,7 +366,7 @@ class MainActivity : AppCompatActivity() {
             .getInstance()
             .toast(
                 "You've Been Hit!",
-                SignalManager.ToastLength.Long
+                SignalManager.ToastLength.SHORT
             )
     }
 

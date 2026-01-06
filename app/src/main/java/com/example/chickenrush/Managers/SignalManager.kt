@@ -1,4 +1,4 @@
-package com.example.chickenrush.utilities
+package com.example.chickenrush.Managers
 
 import android.content.Context
 import android.os.Build
@@ -13,7 +13,7 @@ class SignalManager private constructor(context: Context) {
 
     enum class ToastLength(val length: Int) {
         SHORT(Toast.LENGTH_SHORT),
-        Long(Toast.LENGTH_LONG)
+        LONG(Toast.LENGTH_LONG)
     }
 
     companion object {

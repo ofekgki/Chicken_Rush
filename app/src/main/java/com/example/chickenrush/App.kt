@@ -2,8 +2,8 @@ package com.example.chickenrush
 
 import android.app.Application
 import com.example.chickenrush.utilities.BackgroundMusicPlayer
-import com.example.chickenrush.utilities.SharedPreferencesManager
-import com.example.chickenrush.utilities.SignalManager
+import com.example.chickenrush.Managers.SharedPreferencesManager
+import com.example.chickenrush.Managers.SignalManager
 
 class App: Application() {
     override fun onCreate() {
