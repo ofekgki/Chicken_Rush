@@ -1,4 +1,4 @@
-package com.example.chickenrush.Interfaces
+package com.example.chickenrush.interfaces
 
 interface TiltCallback {
     fun tiltX()

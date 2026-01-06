@@ -1,4 +1,4 @@
-package com.example.chickenrush.Activities
+package com.example.chickenrush.activities
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

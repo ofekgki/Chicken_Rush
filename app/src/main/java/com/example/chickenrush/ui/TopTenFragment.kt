@@ -1,4 +1,4 @@
-package com.example.chickenrush.UI
+package com.example.chickenrush.ui
 
 import androidx.fragment.app.Fragment
 

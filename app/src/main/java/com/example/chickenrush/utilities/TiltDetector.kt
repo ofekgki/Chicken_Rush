@@ -5,10 +5,8 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.util.Log
-import com.example.chickenrush.Interfaces.TiltCallback
+import com.example.chickenrush.interfaces.TiltCallback
 import com.example.chickenrush.R
-import kotlin.math.abs
 
 class TiltDetector(context: Context, private val tiltCallback: TiltCallback) {
 
@@ -20,14 +18,18 @@ class TiltDetector(context: Context, private val tiltCallback: TiltCallback) {
         Sensor.TYPE_ACCELEROMETER
     )
 
-    var tiltX: Int = 0
+    var tiltDiractionX: Int = 0
         private set
 
-    var tiltY: Int = 0
+    var tiltDiractionY: Int = 0
         private set
 
 
-    private val delay: Long = R.integer.tilt_delay.toLong()
+    private val delay: Long =
+        context.resources.getInteger(R.integer.tilt_delay).toLong()
+
+    private val threshold =
+        context.resources.getInteger(R.integer.tilt_threshold).toFloat()
 
     private var timestamp: Long = 0L
     private lateinit var sensorEventListener: SensorEventListener
@@ -55,14 +57,35 @@ class TiltDetector(context: Context, private val tiltCallback: TiltCallback) {
     private fun calculateTile(x: Float, y: Float) {
         if (System.currentTimeMillis() - timestamp >= delay ) {
             timestamp = System.currentTimeMillis()
-            if (abs(x) >= R.integer.tilt_threshold.toFloat()) {
-                tiltX++
-                tiltCallback?.tiltX()
-            }
+            when
+            {
+                x >= threshold -> {
+                    tiltDiractionX = 1 // Left
+                    tiltCallback?.tiltX()
+                }
+                x <= -threshold -> {
+                    tiltDiractionX = -1 // Right
+                    tiltCallback?.tiltX()
+                }
 
-            if (abs(y) >= R.integer.tilt_threshold.toFloat()) {
-                tiltY++
-                tiltCallback?.tiltY()
+                else -> {
+                    tiltDiractionX = 0
+                }
+            }
+            when
+            {
+                y >= threshold -> {
+                    tiltDiractionY = 1 // Slow
+                    tiltCallback?.tiltY()
+                }
+                y <= -threshold -> {
+                    tiltDiractionY = -1 // Fast
+                    tiltCallback?.tiltY()
+                }
+
+                else -> {
+                    tiltDiractionY = 0
+                }
             }
 
         }

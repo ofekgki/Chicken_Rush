@@ -1,8 +1,5 @@
-package com.example.chickenrush.Managers
+package com.example.chickenrush.managers
 
-import android.view.View
-import kotlin.collections.get
-import kotlin.collections.set
 import kotlin.random.Random
 
 class GameManager(private val lifeCount: Int = 3) {

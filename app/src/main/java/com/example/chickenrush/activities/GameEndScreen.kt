@@ -1,4 +1,4 @@
-package com.example.chickenrush.Activities
+package com.example.chickenrush.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.chickenrush.R
 import com.example.chickenrush.utilities.Constants
-import com.example.chickenrush.Managers.SharedPreferencesManager
-import com.example.chickenrush.Managers.SignalManager
+import com.example.chickenrush.managers.SharedPreferencesManager
+import com.example.chickenrush.managers.SignalManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textview.MaterialTextView
 

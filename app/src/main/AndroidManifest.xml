@@ -15,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HW1">
         <activity
-            android:name=".Activities.TopTen"
+            android:name=".activities.TopTen"
             android:exported="false" />
         <activity
-            android:name=".Activities.StartScreen"
+            android:name=".activities.StartScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,10 +27,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.GameEndScreen"
+            android:name=".activities.GameEndScreen"
             android:exported="false" />
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="false"></activity>
     </application>
 

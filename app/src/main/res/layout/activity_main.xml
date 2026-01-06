@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/farm"
     android:layoutDirection="rtl"
-    tools:context=".Activities.MainActivity">
+    tools:context=".activities.MainActivity">
 
     <!--     Hearts-->
 

@@ -1,4 +1,4 @@
-package com.example.chickenrush.Activities
+package com.example.chickenrush.activities
 
 import android.content.Intent
 import android.os.Bundle

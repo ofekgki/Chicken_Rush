@@ -1,4 +1,4 @@
-package com.example.chickenrush.Activities
+package com.example.chickenrush.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,25 +10,26 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.chickenrush.Managers.GameManager
+import com.example.chickenrush.interfaces.TiltCallback
+import com.example.chickenrush.managers.GameManager
 import com.example.chickenrush.R
 import com.example.chickenrush.utilities.BackgroundMusicPlayer
 import com.example.chickenrush.utilities.Constants
-import com.example.chickenrush.Managers.SignalManager
+import com.example.chickenrush.managers.SignalManager
 import com.example.chickenrush.utilities.SingleSoundPlayer
+import com.example.chickenrush.utilities.TiltDetector
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlin.concurrent.timer
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
     //Hearts
     private lateinit var Main_IMG_hearts: Array<AppCompatImageView>
+
     //Roosters
     private lateinit var Main_IMG_Rooster_1: AppCompatImageView
     private lateinit var Main_IMG_Rooster_2: AppCompatImageView
@@ -36,21 +37,27 @@ class MainActivity : AppCompatActivity() {
     private lateinit var Main_IMG_Rooster_4: AppCompatImageView
     private lateinit var Main_IMG_Rooster_5: AppCompatImageView
     private lateinit var Main_IMG_pans: Array<AppCompatImageView>
+
     //Fabs
     private lateinit var Main_FAB_Left: FloatingActionButton
     private lateinit var Main_FAB_Right: FloatingActionButton
+
     //Score
     private lateinit var Main_LBL_Score: MaterialTextView
     private var scoreFlag: Boolean = false
+
     //Seeds
     private lateinit var Main_IMG_seeds: Array<AppCompatImageView>
+
     //Eggs
     private lateinit var Main_IMG_eggs: Array<AppCompatImageView>
+
     //Others
     private var gameSpeed: Boolean = false // f     - slow , t - fast
     private var gameMode: Boolean = false // f - buttons , t - sensors
     private lateinit var timerJob: Job //Timer For Coroutine
     private lateinit var gameManager: GameManager
+    private lateinit var tiltDetector: TiltDetector
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,15 +72,19 @@ class MainActivity : AppCompatActivity() {
 
         findViews()
         gameManager = GameManager(Main_IMG_hearts.size)
-
         initViews()
+        initTiltDetector()
 
     }
+
 
     override fun onResume() {
         super.onResume()
         if (!::timerJob.isInitialized || !timerJob.isActive) {
             startGame()
+        }
+        if(gameMode){
+            tiltDetector.start()
         }
         BackgroundMusicPlayer.getInstance().playMusic()
     }
@@ -82,10 +93,14 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         if (::timerJob.isInitialized) {
             timerJob.cancel()
-            Log.d("Timer","Cancel From Pause" )
+            Log.d("Timer", "Cancel From Pause")
+        }
+        if(gameMode){
+            tiltDetector.stop()
         }
         BackgroundMusicPlayer.getInstance().pauseMusic()
     }
+
 
     private fun findViews() {
 
@@ -237,6 +252,32 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun initTiltDetector() {
+        tiltDetector = TiltDetector(
+            this,
+            object : TiltCallback {
+                override fun tiltX() {
+                    when (tiltDetector.tiltDiractionX) {
+                        1 -> gameManager.moveLeft()
+                        -1 -> gameManager.moveRight()
+
+                    }
+                    updateRooster()
+                }
+
+                override fun tiltY() {
+                    when(tiltDetector.tiltDiractionY){
+                        1 -> gameSpeed = false
+                        -1 -> gameSpeed = true
+                    }
+
+                }
+
+            }
+        )
+    }
+
+
     // Start Timer Coroutine For UI Update & Game Logic
     private fun startGame() {
 
@@ -253,9 +294,9 @@ class MainActivity : AppCompatActivity() {
                     delay(Constants.Timer.DELAY)
 
                 if (scoreFlag)
-                    gameManager.score ++
+                    gameManager.score++
 
-                when(gameManager.checkForHit()){
+                when (gameManager.checkForHit()) {
                     0 -> makeHit(0)
                     1 -> makeHit(1)
                     2 -> makeHit(2)
@@ -313,7 +354,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Doing The Hit Logic For Each Type Of Collision
-    private fun makeHit(type: Int){ // 0 - pan, 1 - seed, 2 - egg
+    private fun makeHit(type: Int) { // 0 - pan, 1 - seed, 2 - egg
         val ssp = SingleSoundPlayer(this)
 
         when (type) {
@@ -323,10 +364,12 @@ class MainActivity : AppCompatActivity() {
                 makeToast()
                 makeVibration()
             }
+
             1 -> {
                 ssp.playSound(R.raw.seedsound)
                 heartIncrease()
             }
+
             else -> {
                 ssp.playSound(R.raw.eggcrack)
                 gameManager.eggsCollected++
@@ -362,7 +405,7 @@ class MainActivity : AppCompatActivity() {
 
     //Toast Function
     private fun makeToast() {
-        SignalManager.Companion
+        SignalManager
             .getInstance()
             .toast(
                 "You've Been Hit!",
@@ -372,7 +415,7 @@ class MainActivity : AppCompatActivity() {
 
     //Vibrate Function
     private fun makeVibration() {
-        SignalManager.Companion
+        SignalManager
             .getInstance()
             .vibrate()
     }

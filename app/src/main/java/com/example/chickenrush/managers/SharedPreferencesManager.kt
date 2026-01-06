@@ -1,4 +1,4 @@
-package com.example.chickenrush.Managers
+package com.example.chickenrush.managers
 
 import android.content.Context
 import com.example.chickenrush.utilities.Constants
