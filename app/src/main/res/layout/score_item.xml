@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_margin="@dimen/Default_Margin"
+    >
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:layout_marginEnd="@dimen/Default_Margin"
+        android:layout_marginTop="@dimen/Default_Margin"
+        android:layout_marginStart="@dimen/Default_Margin"
+        />
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score"
+        android:layout_marginEnd="@dimen/Default_Margin"
+        android:layout_marginTop="@dimen/Default_Margin"
+
+        />
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lat"
+        android:layout_marginEnd="@dimen/Default_Margin"
+        android:layout_marginTop="@dimen/Default_Margin"
+
+        />
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lon"
+        android:layout_marginEnd="@dimen/Default_Margin"
+        android:layout_marginTop="@dimen/Default_Margin"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/map_pin"
+        android:layout_marginStart="@dimen/map_pin_margin"
+        android:layout_marginTop="@dimen/map_pin_top_margin"
+        android:clickable="true"
+        />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.MapFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/topten_FRGMAP_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+
+
+        />
 
 </FrameLayout>
