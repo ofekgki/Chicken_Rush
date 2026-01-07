@@ -1,6 +1,7 @@
 package com.example.chickenrush.managers
 
 import android.content.Context
+import com.example.chickenrush.models.ScoreEntry
 import com.example.chickenrush.utilities.Constants
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -13,13 +14,6 @@ class SharedPreferencesManager private constructor(context: Context) {
     )
 
     private val gson = Gson()
-
-    data class ScoreEntry(
-        val playerName: String,
-        val score: Int,
-        val lat: Double,
-        val lon: Double
-    )
 
     companion object{
         @Volatile

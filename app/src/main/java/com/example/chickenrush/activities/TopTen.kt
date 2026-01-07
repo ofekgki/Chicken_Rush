@@ -46,7 +46,7 @@ class TopTen : AppCompatActivity() {
             .commit()
 
         toptenFragment = TopTenFragment()
-        toptenFragment.highScoreItemClicked =
+        toptenFragment.sc =
             object : ScoreClickedCallback {
 
                 override fun ScoreClicked(lat: Double, lon: Double) {

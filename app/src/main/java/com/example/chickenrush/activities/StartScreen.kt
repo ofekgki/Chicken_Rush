@@ -38,10 +38,10 @@ class StartScreen : AppCompatActivity() {
             insets
         }
         findViews()
-        initviews()
+        initViews()
     }
 
-    private fun initviews() {
+    private fun initViews() {
         start_STC_fastslow.setOnCheckedChangeListener { start_STC_fastslow, isChecked ->
             if(isChecked) {
                 gameSpeed = true
@@ -78,7 +78,7 @@ class StartScreen : AppCompatActivity() {
 
     private fun changeActivity(mode: String, speed: Boolean) {
         val intent = Intent(this, MainActivity::class.java)
-        var bundle = Bundle()
+        val bundle = Bundle()
         bundle.putString(Constants.BundleKeys.MODE_KEY, mode)
         bundle.putBoolean(Constants.BundleKeys.SPEED_KEY, speed)
         intent.putExtras(bundle)

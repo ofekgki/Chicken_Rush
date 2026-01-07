@@ -8,6 +8,7 @@
     >
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/scoreitem_LBL_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
@@ -16,6 +17,7 @@
         android:layout_marginStart="@dimen/Default_Margin"
         />
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/scoreitem_LBL_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Score"
@@ -24,6 +26,7 @@
 
         />
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/scoreitem_LBL_lat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lat"
@@ -32,6 +35,7 @@
 
         />
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/scoreitem_LBL_lon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lon"
@@ -41,6 +45,7 @@
         />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/scoreitem_IMG_pin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/map_pin"
