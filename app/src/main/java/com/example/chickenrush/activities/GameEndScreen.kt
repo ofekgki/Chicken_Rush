@@ -60,7 +60,7 @@ class GameEndScreen : AppCompatActivity() {
         End_LBL_Massage.text = String.format("%03d", score)
 
         End_BTN_StartGame.setOnClickListener { view: View ->
-            if (ValidateName()) {
+            if (validateName()) {
                 SharedPreferencesManager.getInstance().addNewScore(playerName,score, lat, lon)
                 val intent = Intent(this, StartScreen::class.java)
                 startActivity(intent)
@@ -69,7 +69,7 @@ class GameEndScreen : AppCompatActivity() {
         }
 
         End_BTN_Topten.setOnClickListener { view: View ->
-            if (ValidateName()) {
+            if (validateName()) {
                 SharedPreferencesManager.getInstance().addNewScore(playerName,score,lat, lon)
                 val intent = Intent(this, TopTen::class.java)
                 startActivity(intent)
@@ -87,7 +87,7 @@ class GameEndScreen : AppCompatActivity() {
         End_LBL_TopTen = findViewById(R.id.End_LBL_TopTen)
     }
 
-    private fun ValidateName(): Boolean {
+    private fun validateName(): Boolean {
 
         val name = highScore_ET_text.text?.toString()
 
@@ -103,7 +103,7 @@ class GameEndScreen : AppCompatActivity() {
     }
 
     private fun makeToast() {
-        SignalManager.Companion
+        SignalManager
             .getInstance()
             .toast(
                 "Must Enter Name!",
@@ -112,7 +112,7 @@ class GameEndScreen : AppCompatActivity() {
     }
 
     private fun makeVibarate() {
-        SignalManager.Companion
+        SignalManager
             .getInstance()
             .vibrate()
 

@@ -15,4 +15,9 @@
     <string name="mode_sensor">Sensor</string>
     <string name="mode_button">Button</string>
     <string name="main_menu">Main Menu\n</string>
+    <string name="name">Name</string>
+    <string name="score">Score</string>
+    <string name="lat">Lat</string>
+    <string name="lon">Lon</string>
+    <string name="title_activity_map_fragment">MapFrag</string>
 </resources>

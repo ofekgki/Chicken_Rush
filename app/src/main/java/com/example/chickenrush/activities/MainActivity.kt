@@ -381,9 +381,10 @@ class MainActivity : AppCompatActivity() {
 
     //Heart Ui Update
     private fun heartDecrease() {
+
         if (gameManager.hits < Main_IMG_hearts.size) {
+            Main_IMG_hearts[gameManager.hits].visibility = View.INVISIBLE
             gameManager.hits++
-            Main_IMG_hearts[Main_IMG_hearts.size - gameManager.hits].visibility = View.INVISIBLE
         }
         gameManager.seedFlag = gameManager.hits > 0
 
@@ -395,8 +396,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun heartIncrease() {
         if (gameManager.hits > 0) {
+            Main_IMG_hearts[gameManager.hits].visibility = View.VISIBLE
             gameManager.hits--
-            Main_IMG_hearts[Main_IMG_hearts.size - 1 - gameManager.hits].visibility = View.VISIBLE
         }
 
         gameManager.seedFlag = gameManager.hits > 0

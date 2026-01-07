@@ -25,7 +25,6 @@ class TopTenListAdapter (
 
         var scoreitem_LBL_lon: MaterialTextView = itemView.findViewById(R.id.scoreitem_LBL_lon)
 
-        var scoreitem_IMG_pin: AppCompatImageView = itemView.findViewById(R.id.scoreitem_IMG_pin)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScoreVH {

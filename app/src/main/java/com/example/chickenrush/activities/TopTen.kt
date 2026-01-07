@@ -1,5 +1,6 @@
 package com.example.chickenrush.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.activity.enableEdgeToEdge
@@ -8,8 +9,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.chickenrush.R
 import com.example.chickenrush.interfaces.ScoreClickedCallback
-import com.example.chickenrush.ui.MapFragment
+import com.example.chickenrush.ui.MapsActivity
 import com.example.chickenrush.ui.TopTenFragment
+import com.google.android.material.button.MaterialButton
 
 class TopTen : AppCompatActivity() {
 
@@ -18,7 +20,10 @@ class TopTen : AppCompatActivity() {
 
     private lateinit var topten_FRAME_map: FrameLayout
 
-    private lateinit var mapFragment: MapFragment
+
+    private lateinit var topten_BTN_menu: MaterialButton
+
+    private lateinit var mapFragment: MapsActivity
 
     private lateinit var toptenFragment: TopTenFragment
 
@@ -39,21 +44,27 @@ class TopTen : AppCompatActivity() {
     }
 
     private fun initViews() {
-        mapFragment = MapFragment()
+
+        topten_BTN_menu.setOnClickListener {
+            changeActivity()
+        }
+
+        mapFragment = MapsActivity()
         supportFragmentManager
             .beginTransaction()
             .add(R.id.topten_FRAME_map, mapFragment)
             .commit()
 
-        toptenFragment = TopTenFragment()
-        toptenFragment.sc =
+        toptenFragment = TopTenFragment().apply {
+
             object : ScoreClickedCallback {
 
-                override fun ScoreClicked(lat: Double, lon: Double) {
-                    mapFragment.zoom(lat,lon)
+                override fun scoreClicked(lat: Double, lon: Double) {
+                    TODO("Not yet implemented")
                 }
 
             }
+        }
 
         supportFragmentManager
             .beginTransaction()
@@ -64,8 +75,15 @@ class TopTen : AppCompatActivity() {
 
     private fun findViews() {
 
+        topten_BTN_menu = findViewById(R.id.topten_BTN_menu)
         topten_FRAME_list = findViewById(R.id.topten_FRAME_list)
         topten_FRAME_map = findViewById(R.id.topten_FRAME_map)
 
+    }
+
+    private fun changeActivity() {
+        val intent = Intent(this , StartScreen::class.java)
+        startActivity(intent)
+        finish()
     }
 }

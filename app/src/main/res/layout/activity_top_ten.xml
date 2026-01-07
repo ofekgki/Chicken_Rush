@@ -9,33 +9,30 @@
     tools:context=".activities.TopTen">
 
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/topten_BTN_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_menu"
+            android:lines="1"
+            android:textSize="@dimen/Default_StringSize"
+            android:textStyle="bold"
+            />
 
     <FrameLayout
-
         android:id="@+id/topten_FRAME_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background=""
-        android:padding="@dimen/default_padding">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back" />
-
-    </FrameLayout>
+        android:padding="@dimen/default_padding"
+    />
 
     <FrameLayout
         android:id="@+id/topten_FRAME_map"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background=""
-        android:padding="@dimen/default_padding"/>
-    />
-
-
+        android:padding="@dimen/default_padding"
+        />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

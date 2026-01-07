@@ -63,6 +63,7 @@ class StartScreen : AppCompatActivity() {
         }
 
         start_BTN_top10.setOnClickListener {
+            changeActivity()
 
         }
     }
@@ -82,6 +83,11 @@ class StartScreen : AppCompatActivity() {
         bundle.putString(Constants.BundleKeys.MODE_KEY, mode)
         bundle.putBoolean(Constants.BundleKeys.SPEED_KEY, speed)
         intent.putExtras(bundle)
+        startActivity(intent)
+        finish()
+    }
+    private fun changeActivity() {
+        val intent = Intent(this, TopTen::class.java)
         startActivity(intent)
         finish()
     }
