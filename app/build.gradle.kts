@@ -50,9 +50,14 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.gson)
-    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Gson:
+    implementation(libs.gson)
+
+    //Maps + Location
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
 }

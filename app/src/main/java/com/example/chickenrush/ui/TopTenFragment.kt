@@ -12,10 +12,8 @@ import com.example.chickenrush.adapters.TopTenListAdapter
 import com.example.chickenrush.interfaces.ScoreClickedCallback
 import com.example.chickenrush.managers.SharedPreferencesManager
 
-class TopTenFragment : Fragment() {
+class TopTenFragment(private var scoreClickedCallback: ScoreClickedCallback) : Fragment() {
         private lateinit var topten_FRG_RV_list: RecyclerView
-
-        var scoreClickedCallback: ScoreClickedCallback? = null
 
 
     override fun onCreateView(
@@ -29,7 +27,7 @@ class TopTenFragment : Fragment() {
             false
         )
         findViews(v)
-        initViews(v)
+        initViews()
         return v
     }
 
@@ -37,7 +35,7 @@ class TopTenFragment : Fragment() {
         topten_FRG_RV_list = v.findViewById(R.id.topten_FRG_RV_list)
     }
 
-    private fun initViews(v: View) {
+    private fun initViews() {
 
         topten_FRG_RV_list.layoutManager = LinearLayoutManager(requireContext())
 
@@ -47,7 +45,7 @@ class TopTenFragment : Fragment() {
 
         topten_FRG_RV_list.adapter = TopTenListAdapter(scores) {
             entry ->
-                scoreClickedCallback?.scoreClicked(entry.lat, entry.lon)
+            scoreClickedCallback.scoreClicked(entry.lat, entry.lon)
             }
     }
 

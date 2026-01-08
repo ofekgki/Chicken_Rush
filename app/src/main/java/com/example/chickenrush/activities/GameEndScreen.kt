@@ -1,17 +1,22 @@
 package com.example.chickenrush.activities
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.chickenrush.R
 import com.example.chickenrush.utilities.Constants
 import com.example.chickenrush.managers.SharedPreferencesManager
 import com.example.chickenrush.managers.SignalManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textview.MaterialTextView
 
@@ -37,6 +42,10 @@ class GameEndScreen : AppCompatActivity() {
 
     private var lon: Double = 0.0
 
+    private val LOCATION_PERMISSION_REQUEST = 1001
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,29 +57,33 @@ class GameEndScreen : AppCompatActivity() {
             insets
         }
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         findViews()
         initViews()
     }
 
     private fun initViews() {
+
         val bundle: Bundle? = intent.extras
+
+        getCurrentLocation()
 
         val score = bundle?.getInt(Constants.BundleKeys.SCORE_KEY, 0) ?: 0
 
         End_LBL_Massage.text = String.format("%03d", score)
 
-        End_BTN_StartGame.setOnClickListener { view: View ->
+        End_BTN_StartGame.setOnClickListener {
             if (validateName()) {
-                SharedPreferencesManager.getInstance().addNewScore(playerName,score, lat, lon)
+                SharedPreferencesManager.getInstance().addNewScore(playerName, score, lat, lon)
                 val intent = Intent(this, StartScreen::class.java)
                 startActivity(intent)
                 finish()
             }
         }
 
-        End_BTN_Topten.setOnClickListener { view: View ->
+        End_BTN_Topten.setOnClickListener {
             if (validateName()) {
-                SharedPreferencesManager.getInstance().addNewScore(playerName,score,lat, lon)
+                SharedPreferencesManager.getInstance().addNewScore(playerName, score, lat, lon)
                 val intent = Intent(this, TopTen::class.java)
                 startActivity(intent)
                 finish()
@@ -116,5 +129,58 @@ class GameEndScreen : AppCompatActivity() {
             .getInstance()
             .vibrate()
 
+    }
+
+    //Location
+
+    private fun hasLocationPermission(): Boolean{
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestLocationPermission(){
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            LOCATION_PERMISSION_REQUEST
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == LOCATION_PERMISSION_REQUEST){
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                getCurrentLocation()
+            }
+            else {
+                lon = 0.0
+                lat = 0.0
+            }
+        }
+
+    }
+
+    private fun getCurrentLocation() {
+        if (!hasLocationPermission()) {
+            requestLocationPermission()
+            return
+        }
+
+
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location ->
+                location?.let {
+                    lat = it.latitude
+                    lon = it.longitude
+                 }
+            }
     }
 }
