@@ -23,6 +23,9 @@ class TopTen : AppCompatActivity() {
 
     private lateinit var topten_BTN_menu: MaterialButton
 
+
+    private lateinit var topten_BTN_startGame: MaterialButton
+
     private lateinit var mapFragment: MapsFragment
 
     private lateinit var toptenFragment: TopTenFragment
@@ -46,7 +49,11 @@ class TopTen : AppCompatActivity() {
     private fun initViews() {
 
         topten_BTN_menu.setOnClickListener {
-            changeActivity()
+            changeActivity("Menu")
+        }
+
+        topten_BTN_startGame.setOnClickListener {
+            changeActivity("Game")
         }
 
         mapFragment = MapsFragment()
@@ -71,15 +78,29 @@ class TopTen : AppCompatActivity() {
 
     private fun findViews() {
 
+        topten_BTN_startGame = findViewById(R.id.topten_BTN_startGame)
         topten_BTN_menu = findViewById(R.id.topten_BTN_menu)
         topten_FRAME_list = findViewById(R.id.topten_FRAME_list)
         topten_FRAME_map = findViewById(R.id.topten_FRAME_map)
 
     }
 
-    private fun changeActivity() {
-        val intent = Intent(this , StartScreen::class.java)
-        startActivity(intent)
-        finish()
+    private fun changeActivity(type: String = "menu") {
+        when(type){
+
+            "Menu" -> {
+                val intent = Intent(this , StartScreen::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            "Game" -> {
+                val intent = Intent(this , MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+        }
+
     }
 }

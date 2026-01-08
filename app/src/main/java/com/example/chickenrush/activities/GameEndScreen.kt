@@ -1,6 +1,7 @@
 package com.example.chickenrush.activities
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -29,7 +30,7 @@ class GameEndScreen : AppCompatActivity() {
     private lateinit var End_LBL_StartGame: MaterialTextView
 
 
-    private lateinit var End_BTN_Topten: AppCompatImageButton
+    private lateinit var End_BTN_TopTen: AppCompatImageButton
 
     private lateinit var End_LBL_TopTen: MaterialTextView
 
@@ -62,6 +63,7 @@ class GameEndScreen : AppCompatActivity() {
         initViews()
     }
 
+    @SuppressLint("DefaultLocale")
     private fun initViews() {
 
         val bundle: Bundle? = intent.extras
@@ -81,7 +83,7 @@ class GameEndScreen : AppCompatActivity() {
             }
         }
 
-        End_BTN_Topten.setOnClickListener {
+        End_BTN_TopTen.setOnClickListener {
             if (validateName()) {
                 SharedPreferencesManager.getInstance().addNewScore(playerName, score, lat, lon)
                 val intent = Intent(this, TopTen::class.java)
@@ -96,7 +98,7 @@ class GameEndScreen : AppCompatActivity() {
         End_LBL_Massage = findViewById(R.id.End_LBL_Massage)
         End_BTN_StartGame = findViewById(R.id.End_BTN_StartGame)
         End_LBL_StartGame = findViewById(R.id.End_LBL_StartGame)
-        End_BTN_Topten = findViewById(R.id.End_BTN_Topten)
+        End_BTN_TopTen = findViewById(R.id.End_BTN_Topten)
         End_LBL_TopTen = findViewById(R.id.End_LBL_TopTen)
     }
 

@@ -16,4 +16,5 @@
     <dimen name="map_pin_margin">50dp</dimen>
     <dimen name="map_pin_top_margin">20dp</dimen>
     <dimen name="top_ten_default_string">16sp</dimen>
+    <dimen name="maps_radius">24dp</dimen>
 </resources>
