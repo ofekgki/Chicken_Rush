@@ -55,7 +55,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         pinAllScores(mMap)
         // Add a marker in Sydney and move the camera
         val telAviv = LatLng(32.0853, 34.7818)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(telAviv, 12f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(telAviv, 10f))
     }
 
     fun focusOn(lat: Double, lon: Double, title: String = "Score") {

@@ -11,7 +11,7 @@
     <dimen name="EndLBL_paddingTop">58dp</dimen>
     <dimen name="EndLBL_paddingLeft">46dp</dimen>
     <dimen name="TopLBL_paddingLeft">60dp</dimen>
-    <dimen name="heading_size">64sp</dimen>
+    <dimen name="heading_size">58sp</dimen>
     <dimen name="default_padding">24dp</dimen>
     <dimen name="map_pin_margin">50dp</dimen>
     <dimen name="map_pin_top_margin">20dp</dimen>

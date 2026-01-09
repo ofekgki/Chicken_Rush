@@ -40,8 +40,8 @@ class TopTenListAdapter (
 
         holder.scoreitem_LBL_name.text = item.playerName
         holder.scoreitem_LBL_score.text = item.score.toString()
-        holder.scoreitem_LBL_lat.text = item.lat.toString()
-        holder.scoreitem_LBL_lon.text = item.lon.toString()
+        holder.scoreitem_LBL_lat.text = String.format("%.3f", item.lat)
+        holder.scoreitem_LBL_lon.text = String.format("%.3f", item.lon)
 
         holder.itemView.setOnClickListener {
             onItemClick(item)

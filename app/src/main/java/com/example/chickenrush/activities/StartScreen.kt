@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.chickenrush.R
+import com.example.chickenrush.utilities.BackgroundMusicPlayer
 import com.example.chickenrush.utilities.Constants
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -46,9 +47,16 @@ class StartScreen : AppCompatActivity() {
         }
         findViews()
         initViews()
+        BackgroundMusicPlayer.getInstance().playMusic()
+
     }
 
+    override fun onPause() {
+        super.onPause()
+        BackgroundMusicPlayer.getInstance().pauseMusic()
+    }
     private fun initViews() {
+
         start_STC_fastslow.setOnCheckedChangeListener { start_STC_fastslow, isChecked ->
             if(isChecked) {
                 gameSpeed = true
@@ -62,9 +70,11 @@ class StartScreen : AppCompatActivity() {
         start_STC_music.setOnCheckedChangeListener { start_STC_music, isChecked ->
             if(isChecked) {
                 backgroundMusic = true
+                BackgroundMusicPlayer.getInstance().playMusic()
             }
             else{
                 backgroundMusic = false
+                BackgroundMusicPlayer.getInstance().pauseMusic()
             }
         }
 
@@ -108,5 +118,7 @@ class StartScreen : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+
 
 }
