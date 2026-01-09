@@ -5,4 +5,5 @@
     <color name="green_500">#388E3C</color>
     <color name="orange_500">#BC5100</color>
     <color name="yellow_500">#FFFF6B</color>
+    <color name="dark_overlay">#99000000</color>
 </resources>

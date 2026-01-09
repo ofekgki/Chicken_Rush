@@ -85,7 +85,7 @@ class TopTen : AppCompatActivity() {
 
     }
 
-    private fun changeActivity(type: String = "menu") {
+    private fun changeActivity(type: String = "Menu") {
         when(type){
 
             "Menu" -> {

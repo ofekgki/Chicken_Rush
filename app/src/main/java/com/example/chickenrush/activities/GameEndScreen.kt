@@ -108,7 +108,7 @@ class GameEndScreen : AppCompatActivity() {
 
         if (name.isNullOrEmpty()) {
             makeToast()
-            makeVibarate()
+            makeVibrate()
             return false
         } else {
             playerName = highScore_ET_text.text.toString().trim()
@@ -126,7 +126,7 @@ class GameEndScreen : AppCompatActivity() {
             )
     }
 
-    private fun makeVibarate() {
+    private fun makeVibrate() {
         SignalManager
             .getInstance()
             .vibrate()
@@ -163,26 +163,31 @@ class GameEndScreen : AppCompatActivity() {
                 getCurrentLocation()
             }
             else {
-                lon = 0.0
-                lat = 0.0
+
+                lat = 32.00343240929441
+                lon = 34.87058765326731
             }
         }
 
     }
 
+    @SuppressLint("MissingPermission") // Function Called After Checking For Permission Granted
     private fun getCurrentLocation() {
-        if (!hasLocationPermission()) {
+        if (hasLocationPermission()) {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    location?.let {
+                        lat = it.latitude
+                        lon = it.longitude
+                    }
+                }
+                .addOnFailureListener {
+                    lat = 32.00343240929441
+                    lon = 34.87058765326731
+                }
+        } else {
+
             requestLocationPermission()
-            return
         }
-
-
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location ->
-                location?.let {
-                    lat = it.latitude
-                    lon = it.longitude
-                 }
-            }
     }
 }

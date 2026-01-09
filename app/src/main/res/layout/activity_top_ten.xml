@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:context=".activities.TopTen"
     android:background="@drawable/barn"
+    android:backgroundTint="@color/dark_overlay"
+    android:backgroundTintMode="src_atop"
     >
 
 <RelativeLayout

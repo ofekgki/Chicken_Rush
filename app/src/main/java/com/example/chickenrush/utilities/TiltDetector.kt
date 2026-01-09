@@ -6,7 +6,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import com.example.chickenrush.interfaces.TiltCallback
-import com.example.chickenrush.R
+
 
 class TiltDetector(context: Context, private val tiltCallback: TiltCallback) {
 
@@ -25,11 +25,11 @@ class TiltDetector(context: Context, private val tiltCallback: TiltCallback) {
         private set
 
 
-    private val delay: Long =
-        context.resources.getInteger(R.integer.tilt_delay).toLong()
+    private val delay: Long = Constants.Tilt.TILT_DELAY
 
-    private val threshold =
-        context.resources.getInteger(R.integer.tilt_threshold).toFloat()
+
+    private val threshold = Constants.Tilt.TILT_THRESHOLD
+
 
     private var timestamp: Long = 0L
     private lateinit var sensorEventListener: SensorEventListener

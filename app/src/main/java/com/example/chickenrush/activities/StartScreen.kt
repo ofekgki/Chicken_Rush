@@ -17,6 +17,9 @@ class StartScreen : AppCompatActivity() {
 
     private lateinit var start_STC_fastslow: SwitchMaterial
 
+
+    private lateinit var start_STC_music: SwitchMaterial
+
     private lateinit var start_BTN_sensor: MaterialButton
 
     private lateinit var start_BTN_button: MaterialButton
@@ -26,6 +29,10 @@ class StartScreen : AppCompatActivity() {
     private lateinit var start_LBL_heading: MaterialTextView
 
     private var gameSpeed: Boolean = false // f - slow,  t - fast
+
+    private var backgroundMusic: Boolean = true
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,14 +59,22 @@ class StartScreen : AppCompatActivity() {
                 start_STC_fastslow.text = getString(R.string.slow)
             }
         }
+        start_STC_music.setOnCheckedChangeListener { start_STC_music, isChecked ->
+            if(isChecked) {
+                backgroundMusic = true
+            }
+            else{
+                backgroundMusic = false
+            }
+        }
 
         start_BTN_sensor.setOnClickListener {
-            changeActivity(getString(R.string.mode_sensor), gameSpeed)
+            changeActivity(getString(R.string.mode_sensor), gameSpeed,backgroundMusic)
 
         }
 
         start_BTN_button.setOnClickListener {
-            changeActivity(getString(R.string.mode_button), gameSpeed)
+            changeActivity(getString(R.string.mode_button), gameSpeed,backgroundMusic)
         }
 
         start_BTN_top10.setOnClickListener {
@@ -70,6 +85,7 @@ class StartScreen : AppCompatActivity() {
 
     private fun findViews() {
         start_STC_fastslow = findViewById(R.id.start_STC_fastslow)
+        start_STC_music = findViewById(R.id.start_STC_music)
         start_BTN_sensor = findViewById(R.id.start_BTN_sensor)
         start_BTN_button = findViewById(R.id.start_BTN_button)
         start_BTN_top10 = findViewById(R.id.start_BTN_top10)
@@ -77,11 +93,12 @@ class StartScreen : AppCompatActivity() {
 
     }
 
-    private fun changeActivity(mode: String, speed: Boolean) {
+    private fun changeActivity(mode: String, speed: Boolean, music: Boolean) {
         val intent = Intent(this, MainActivity::class.java)
         val bundle = Bundle()
         bundle.putString(Constants.BundleKeys.MODE_KEY, mode)
         bundle.putBoolean(Constants.BundleKeys.SPEED_KEY, speed)
+        bundle.putBoolean(Constants.BundleKeys.MUSIC_KEY, music)
         intent.putExtras(bundle)
         startActivity(intent)
         finish()

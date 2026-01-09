@@ -3,7 +3,6 @@ package com.example.chickenrush.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chickenrush.R
 import com.example.chickenrush.models.ScoreEntry

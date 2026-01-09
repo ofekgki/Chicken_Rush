@@ -1,5 +1,6 @@
 package com.example.chickenrush.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -53,8 +54,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var Main_IMG_eggs: Array<AppCompatImageView>
 
     //Others
-    private var gameSpeed: Boolean = false // f     - slow , t - fast
+    private var gameSpeed: Boolean = false // f - slow , t - fast
     private var gameMode: Boolean = false // f - buttons , t - sensors
+
+    private var backgroundMusic: Boolean = true
     private lateinit var timerJob: Job //Timer For Coroutine
     private lateinit var gameManager: GameManager
     private lateinit var tiltDetector: TiltDetector
@@ -77,16 +80,18 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     override fun onResume() {
         super.onResume()
         if (!::timerJob.isInitialized || !timerJob.isActive) {
             startGame()
         }
-        if(gameMode){
+        if (gameMode) {
             tiltDetector.start()
         }
-        BackgroundMusicPlayer.getInstance().playMusic()
+        if (backgroundMusic) {
+            BackgroundMusicPlayer.getInstance().playMusic()
+        }
+
     }
 
     override fun onPause() {
@@ -95,10 +100,12 @@ class MainActivity : AppCompatActivity() {
             timerJob.cancel()
             Log.d("Timer", "Cancel From Pause")
         }
-        if(gameMode){
+        if (gameMode) {
             tiltDetector.stop()
         }
-        BackgroundMusicPlayer.getInstance().pauseMusic()
+        if (backgroundMusic) {
+            BackgroundMusicPlayer.getInstance().pauseMusic()
+        }
     }
 
 
@@ -227,9 +234,11 @@ class MainActivity : AppCompatActivity() {
 
         val bundle: Bundle? = intent.extras
 
-        val message = bundle?.getString(Constants.BundleKeys.MODE_KEY) ?: "Button"
+        val mode = bundle?.getString(Constants.BundleKeys.MODE_KEY) ?: "Button"
 
-        gameMode = (message == getString(R.string.mode_sensor))
+        backgroundMusic = bundle?.getBoolean(Constants.BundleKeys.MUSIC_KEY) ?: true
+        
+        gameMode = (mode == getString(R.string.mode_sensor))
 
         gameSpeed = bundle?.getBoolean(Constants.BundleKeys.SPEED_KEY) ?: false
 
@@ -266,7 +275,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun tiltY() {
-                    when(tiltDetector.tiltDiractionY){
+                    when (tiltDetector.tiltDiractionY) {
                         1 -> gameSpeed = false
                         -1 -> gameSpeed = true
                     }
@@ -325,6 +334,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Change Visibility Of Pans & Seed & Eggs And 'Move' them Down + Update The Score
+    @SuppressLint("DefaultLocale")
     private fun refreshUI() {
         Main_IMG_pans.forEachIndexed { index, img ->
             if (gameManager.isPanVisible[index] == 1) {
