@@ -7,7 +7,7 @@ Project for a Application Development course, in Afeka - the academic college of
 Chicken Rush! is a farm theme game application using Kotlin, in the game you should escape from obstacles and collect eggs for maximum score!
 The game features multiple input methods and location-based scoring.
 
-For demonstration check the video in the project file
+For demonstration check the video in the project files
 
 # Features
 -   **Mode Control**: Players can choose between buttons or physical device tilting using the phone sensors.
