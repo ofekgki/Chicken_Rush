@@ -106,7 +106,7 @@
         android:layout_below="@id/Main_Hearts"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:weightSum="6">
+        android:weightSum="8">
 
         <!--    Pans 1-->
 
@@ -413,6 +413,108 @@
                 app:srcCompat="@drawable/frying_pan" />
         </LinearLayout>
 
+        <!--    Pans 7-->
+
+        <LinearLayout
+            android:id="@+id/Main_PanRow_7"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Pan31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/frying_pan"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Pan32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/frying_pan" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Pan33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/frying_pan" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Pan34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/frying_pan" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Pan35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/frying_pan" />
+        </LinearLayout>
+
+        <!--    Pans 8-->
+
+        <LinearLayout
+            android:id="@+id/Main_PanRow_8"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Pan36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/frying_pan"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Pan37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/frying_pan" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Pan38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/frying_pan" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Pan39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/frying_pan" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Pan40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/frying_pan" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <!-- Seeds -->
@@ -424,7 +526,7 @@
         android:layout_below="@id/Main_Hearts"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:weightSum="6">
+        android:weightSum="8">
 
         <!--    Seeds 1-->
 
@@ -730,6 +832,108 @@
                 app:srcCompat="@drawable/seed" />
         </LinearLayout>
 
+       <!--    Seeds 7-->
+
+        <LinearLayout
+            android:id="@+id/Main_SeedRow_7"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Seed31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/seed"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Seed32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/seed" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Seed33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/seed" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Seed34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/seed" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Seed35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/seed" />
+        </LinearLayout>
+
+       <!--    Seeds 8-->
+
+        <LinearLayout
+            android:id="@+id/Main_SeedRow_8"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Seed36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/seed"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Seed37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/seed" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Seed38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/seed" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Seed39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/seed" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Seed40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/seed" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <!-- Eggs -->
@@ -741,7 +945,7 @@
         android:layout_below="@id/Main_Hearts"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:weightSum="6">
+        android:weightSum="8">
 
         <!--    Eggs 1-->
 
@@ -1040,6 +1244,108 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/Main_IMG_Egg30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/egg" />
+        </LinearLayout>
+
+       <!--    Eggs 7-->
+
+        <LinearLayout
+            android:id="@+id/Main_EggRow_7"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Egg31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/egg"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Egg32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/egg" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Egg33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/egg" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Egg34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/egg" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Egg35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/egg" />
+        </LinearLayout>
+
+       <!--    Eggs 8-->
+
+        <LinearLayout
+            android:id="@+id/Main_EggRow_8"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Egg36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/egg"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Egg37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/egg" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Egg38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/egg" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Egg39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/egg" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Main_IMG_Egg40"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"

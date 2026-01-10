@@ -9,7 +9,7 @@ The game features multiple input methods and location-based scoring.
 
 # Features
 -   **Mode Control**: Players can choose between buttons or physical device tilting using the phone sensors.
--   **Changing Speed**: Includes a Fast Speed Mode toggle to increase game difficulty.
+-   **Changing Speed**: Includes a Fast Speed Mode toggle to increase game difficulty and getting score multiplayer.
 
 -   **Sound Effects**: Custom audio for hit and collectables.
 
@@ -43,8 +43,7 @@ To run this project in your local machine, you'll need to use a Google Maps API 
 -  Tilt your phone Left/Right to switch lanes
  -  Tilt your phone Forward/Backward to change the speed 
  
-<img src="screenshots/2_Buttons_Mode.jpg" width="300" alt="Buttons Mode">
- <img src="screenshots/3_Sensor_Mode.jpg" width="300" alt=" Sensor Mode">
+<img src="screenshots/2_Buttons_Mode.jpg" width="300" alt="Buttons Mode">  <img src="screenshots/3_Sensor_Mode.jpg" width="300" alt=" Sensor Mode">
 
 #### End Game Screen:
 

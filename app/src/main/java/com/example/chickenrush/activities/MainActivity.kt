@@ -153,7 +153,17 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.Main_IMG_Pan27),
             findViewById(R.id.Main_IMG_Pan28),
             findViewById(R.id.Main_IMG_Pan29),
-            findViewById(R.id.Main_IMG_Pan30)
+            findViewById(R.id.Main_IMG_Pan30),
+            findViewById(R.id.Main_IMG_Pan31),
+            findViewById(R.id.Main_IMG_Pan32),
+            findViewById(R.id.Main_IMG_Pan33),
+            findViewById(R.id.Main_IMG_Pan34),
+            findViewById(R.id.Main_IMG_Pan35),
+            findViewById(R.id.Main_IMG_Pan36),
+            findViewById(R.id.Main_IMG_Pan37),
+            findViewById(R.id.Main_IMG_Pan38),
+            findViewById(R.id.Main_IMG_Pan39),
+            findViewById(R.id.Main_IMG_Pan40)
         )
 
         Main_IMG_seeds = arrayOf(
@@ -186,7 +196,17 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.Main_IMG_Seed27),
             findViewById(R.id.Main_IMG_Seed28),
             findViewById(R.id.Main_IMG_Seed29),
-            findViewById(R.id.Main_IMG_Seed30)
+            findViewById(R.id.Main_IMG_Seed30),
+            findViewById(R.id.Main_IMG_Seed31),
+            findViewById(R.id.Main_IMG_Seed32),
+            findViewById(R.id.Main_IMG_Seed33),
+            findViewById(R.id.Main_IMG_Seed34),
+            findViewById(R.id.Main_IMG_Seed35),
+            findViewById(R.id.Main_IMG_Seed36),
+            findViewById(R.id.Main_IMG_Seed37),
+            findViewById(R.id.Main_IMG_Seed38),
+            findViewById(R.id.Main_IMG_Seed39),
+            findViewById(R.id.Main_IMG_Seed40)
         )
         Main_IMG_eggs = arrayOf(
             findViewById(R.id.Main_IMG_Egg1),
@@ -218,7 +238,17 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.Main_IMG_Egg27),
             findViewById(R.id.Main_IMG_Egg28),
             findViewById(R.id.Main_IMG_Egg29),
-            findViewById(R.id.Main_IMG_Egg30)
+            findViewById(R.id.Main_IMG_Egg30),
+            findViewById(R.id.Main_IMG_Egg31),
+            findViewById(R.id.Main_IMG_Egg32),
+            findViewById(R.id.Main_IMG_Egg33),
+            findViewById(R.id.Main_IMG_Egg34),
+            findViewById(R.id.Main_IMG_Egg35),
+            findViewById(R.id.Main_IMG_Egg36),
+            findViewById(R.id.Main_IMG_Egg37),
+            findViewById(R.id.Main_IMG_Egg38),
+            findViewById(R.id.Main_IMG_Egg39),
+            findViewById(R.id.Main_IMG_Egg40)
         )
 
         Main_FAB_Right = findViewById(R.id.Main_FAB_Right)

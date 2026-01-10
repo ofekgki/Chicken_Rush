@@ -14,11 +14,11 @@ class GameManager(private val lifeCount: Int = 3) {
 
     var score: Int = 0
 
-    val isPanVisible = IntArray(30)
+    val isPanVisible = IntArray(40)
 
-    val isEggVisible = IntArray(30)
+    val isEggVisible = IntArray(40)
 
-    val isSeedVisible = IntArray(30)
+    val isSeedVisible = IntArray(40)
 
     var seedSeenOnBoard = false
 
@@ -59,11 +59,11 @@ class GameManager(private val lifeCount: Int = 3) {
     }
 
     private fun updatePanVisibleArray() {
-        for (i in 29 downTo 0) {
+        for (i in 39 downTo 0) {
             if (isPanVisible[i] == 1) {
                 isPanVisible[i] = 0
                 val next = i + 5
-                if (next <= 29) {
+                if (next <= 39) {
                     isPanVisible[next] = 1
                 }
             }
@@ -88,11 +88,11 @@ class GameManager(private val lifeCount: Int = 3) {
     private fun updateEggVisibleArray() {
         var anyEgg = false
 
-        for (i in 29 downTo 0) {
+        for (i in 39 downTo 0) {
             if (isEggVisible[i] == 1) {
                 isEggVisible[i] = 0
                 val next = i + 5
-                if (next <= 29) {
+                if (next <= 39) {
                     isEggVisible[next] = 1
                     anyEgg = true
                 }
@@ -115,11 +115,11 @@ class GameManager(private val lifeCount: Int = 3) {
     }
     fun updateSeedVisibleArray() {
         var anySeed = false
-        for (i in 29 downTo 0) {
+        for (i in 39 downTo 0) {
             if (isSeedVisible[i] == 1) {
                 isSeedVisible[i] = 0
                 val next = i + 5
-                if (next <= 29) {
+                if (next <= 39) {
                     isSeedVisible[next] = 1
                     anySeed = true
                 }
@@ -157,7 +157,7 @@ class GameManager(private val lifeCount: Int = 3) {
 
 
     private fun preventSeedPanEggOverlap() {
-        for (i in 0 until 30) {
+        for (i in 0 until 40) {
             if (isPanVisible[i] == 1) {
                 if (isSeedVisible[i] == 1) {
                     isSeedVisible[i] = 0
@@ -177,11 +177,11 @@ class GameManager(private val lifeCount: Int = 3) {
 
     fun checkForHit(): Int { // 0 for pan hit , 1 for seed hit , 2 for egg hit, -1 for no hit
         val hitIndex = when (roosterPosition) {
-            0 -> 25
-            1 -> 26
-            2 -> 27
-            3 -> 28
-            else -> 29
+            0 -> 35
+            1 -> 36
+            2 -> 37
+            3 -> 38
+            else -> 39
         }
         if (isPanVisible[hitIndex] == 1) {
             isPanVisible[hitIndex] = 0
