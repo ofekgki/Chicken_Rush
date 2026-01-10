@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chicken Rush</string>
+    <string name="app_name">Chicken Rush!</string>
     <string name="left_arrow">Left Arrow</string>
     <string name="right_arrow">Right Arrow</string>
     <string name="start_game">Start Game</string>
