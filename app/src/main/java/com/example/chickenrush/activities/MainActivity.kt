@@ -436,8 +436,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun heartIncrease() {
         if (gameManager.hits > 0) {
-            Main_IMG_hearts[gameManager.hits].visibility = View.VISIBLE
             gameManager.hits--
+            Main_IMG_hearts[gameManager.hits].visibility = View.VISIBLE
         }
 
         gameManager.seedFlag = gameManager.hits > 0
