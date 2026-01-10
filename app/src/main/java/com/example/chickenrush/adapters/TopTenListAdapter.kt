@@ -1,5 +1,6 @@
 package com.example.chickenrush.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class TopTenListAdapter (
             )
         return ScoreVH(v)
     }
+
 
     override fun onBindViewHolder(holder: ScoreVH, position: Int) {
         val item = items[position]

@@ -6,8 +6,8 @@ class Constants {
     }
 
     object Tilt{
-        const val TILT_DELAY: Long = 500L
-        const val TILT_THRESHOLD: Float = 3F
+        const val TILT_DELAY: Long = 400L
+        const val TILT_THRESHOLD: Float = 2F
 
     }
 

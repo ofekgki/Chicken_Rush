@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/kitchen"
-    tools:context=".activities.GameEndScreen">
+    tools:context=".activities.GameEndScreen"
+    android:backgroundTint="@color/dark_overlay"
+    android:backgroundTintMode="src_atop"
+    >
 
 
     <com.google.android.material.textfield.TextInputEditText

@@ -266,7 +266,7 @@ class MainActivity : AppCompatActivity() {
             this,
             object : TiltCallback {
                 override fun tiltX() {
-                    when (tiltDetector.tiltDiractionX) {
+                    when (tiltDetector.tiltDirectionX) {
                         1 -> gameManager.moveLeft()
                         -1 -> gameManager.moveRight()
 
@@ -275,7 +275,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun tiltY() {
-                    when (tiltDetector.tiltDiractionY) {
+                    when (tiltDetector.tiltDirectionY) {
                         1 -> gameSpeed = false
                         -1 -> gameSpeed = true
                     }

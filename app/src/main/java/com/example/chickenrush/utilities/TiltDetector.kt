@@ -18,10 +18,10 @@ class TiltDetector(context: Context, private val tiltCallback: TiltCallback) {
         Sensor.TYPE_ACCELEROMETER
     )
 
-    var tiltDiractionX: Int = 0
+    var tiltDirectionX: Int = 0
         private set
 
-    var tiltDiractionY: Int = 0
+    var tiltDirectionY: Int = 0
         private set
 
 
@@ -60,31 +60,31 @@ class TiltDetector(context: Context, private val tiltCallback: TiltCallback) {
             when
             {
                 x >= threshold -> {
-                    tiltDiractionX = 1 // Left
+                    tiltDirectionX = 1 // Left
                     tiltCallback?.tiltX()
                 }
                 x <= -threshold -> {
-                    tiltDiractionX = -1 // Right
+                    tiltDirectionX = -1 // Right
                     tiltCallback?.tiltX()
                 }
 
                 else -> {
-                    tiltDiractionX = 0
+                    tiltDirectionX = 0
                 }
             }
             when
             {
                 y >= threshold -> {
-                    tiltDiractionY = 1 // Slow
+                    tiltDirectionY = 1 // Slow
                     tiltCallback?.tiltY()
                 }
                 y <= -threshold -> {
-                    tiltDiractionY = -1 // Fast
+                    tiltDirectionY = -1 // Fast
                     tiltCallback?.tiltY()
                 }
 
                 else -> {
-                    tiltDiractionY = 0
+                    tiltDirectionY = 0
                 }
             }
 
